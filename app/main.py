@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, timezone
 
 import uvicorn
 from fastapi import FastAPI
@@ -10,6 +11,8 @@ app = FastAPI(
     version="1.0.0",
     root_path=os.getenv("ROOT_PATH", "/GitOps-Starter"),
 )
+
+STARTED_AT = datetime.now(timezone.utc)
 
 
 @app.get("/")
@@ -27,6 +30,17 @@ async def health_check():
     )
 
 
+@app.get("/info")
+async def service_info():
+    """Service metadata endpoint."""
+    return {
+        "service": "fastapi-gitops-starter",
+        "version": app.version,
+        "started_at": STARTED_AT.isoformat(),
+        "root_path": app.root_path,
+    }
+
+
 @app.get("/api/items")
 async def list_items():
     """Example endpoint to list items."""
@@ -36,6 +50,17 @@ async def list_items():
             {"id": 2, "name": "Item 2", "description": "Second item"},
             {"id": 3, "name": "Item 3", "description": "Third item"},
         ]
+    }
+
+
+@app.post("/api/items")
+async def create_item(name: str, description: str):
+    """Create a new item."""
+    return {
+        "id": 999,
+        "name": name,
+        "description": description,
+        "created": True,
     }
 
 
