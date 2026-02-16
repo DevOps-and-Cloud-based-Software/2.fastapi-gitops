@@ -55,3 +55,13 @@ def test_create_item():
     assert data["name"] == "New Item"
     assert data["description"] == "Created item"
     assert data["created"] is True
+
+def test_service_info():
+    """Test the service info endpoint."""
+    response = client.get("/info")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["service"] == "fastapi-gitops-starter"
+    assert data["version"] == "1.0.0"
+    assert data["root_path"] == "/GitOps-Starter"
+    assert "T" in data["started_at"]
