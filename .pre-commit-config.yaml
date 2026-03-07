@@ -16,6 +16,7 @@ repos:
     rev: 1.7.10
     hooks:
       - id: bandit
+        args: ["--exclude", "tests"]
 
   - repo: https://github.com/Yelp/detect-secrets        # Prevent committing secrets
     rev: v1.5.0
