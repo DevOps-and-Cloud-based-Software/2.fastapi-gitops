@@ -1,0 +1,24 @@
+image:
+  repository: fastapi-gitops-starter
+  tag: "latest"
+  # pullPolicy: Never
+  pullPolicy: IfNotPresent
+
+
+registry:
+  createImagePullSecret: false
+
+imagePullSecrets: []
+
+ingress:
+  hosts:
+    - host: minikube.test
+      paths:
+        - path: /
+          pathType: Prefix
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 10
