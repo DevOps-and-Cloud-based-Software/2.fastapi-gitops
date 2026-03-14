@@ -15,11 +15,11 @@ repos:
       - id: isort
 
   # check for security issues
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.10
+  - repo: https://github.com/returntocorp/semgrep
+    rev: v1.68.0
     hooks:
-      - id: bandit
-        args: ["-c", "pyproject.toml"]
+      - id: semgrep
+        args: ['--config', 'p/python', '--error']
 
   # prevent committing secrets
   - repo: https://github.com/Yelp/detect-secrets
