@@ -2,12 +2,12 @@ name: CI/CD Pipeline
 
 on:
   release:
-    types: [ published ]
+    types: [published]
   push:
     branches:
-      - '**'
+      - "**"
     tags-ignore:
-      - '**'
+      - "**"
 
 jobs:
   lint:
